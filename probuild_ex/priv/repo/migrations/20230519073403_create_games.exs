@@ -3,12 +3,12 @@ defmodule ProbuildEx.Repo.Migrations.CreateGames do
 
   def change do
     create table(:games) do
-      add :creation, :utc_datetime
-      add :duration, :integer
-      add :platform_id, :string
-      add :riot_id, :text
-      add :version, :text
-      add :winner, :integer
+      add :creation, :utc_datetime, null: false
+      add :duration, :integer, null: false
+      add :platform_id, :string, null: false
+      add :riot_id, :text, null: false
+      add :version, :text, null: false
+      add :winner, :integer, null: false
 
       timestamps()
     end

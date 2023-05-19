@@ -3,19 +3,19 @@ defmodule ProbuildEx.Repo.Migrations.CreateParticipants do
 
   def change do
     create table(:participants) do
-      add :assists, :integer
-      add :champion_id, :integer
-      add :deaths, :integer
-      add :gold_earned, :integer
-      add :items, {:array, :integer}
-      add :kills, :integer
-      add :summoners, {:array, :integer}
-      add :team_position, :string
-      add :team_id, :integer
-      add :win, :boolean, default: false, null: false
-      add :game_id, references(:games, on_delete: :nothing)
-      add :summoner_id, references(:summoners, on_delete: :nothing)
-      add :opponent_participant_id, references(:participants, on_delete: :nothing)
+      add :assists, :integer, null: false
+      add :champion_id, :integer, null: false
+      add :deaths, :integer, null: false
+      add :gold_earned, :integer, null: false
+      add :items, {:array, :integer}, null: false
+      add :kills, :integer, null: false
+      add :summoners, {:array, :integer}, null: false
+      add :team_position, :string, null: false
+      add :team_id, :integer, null: false
+      add :win, :boolean, default: false, null: false, null: false
+      add :game_id, references(:games, on_delete: :delete_all), null: false
+      add :summoner_id, references(:summoners, on_delete: :delete_all), null: false
+      add :opponent_participant_id, references(:participants, on_delete: :delete_all), null: true
 
       timestamps()
     end
