@@ -3,7 +3,7 @@ import Config
 # Configure your database
 config :probuild_ex, ProbuildEx.Repo,
   username: "postgres",
-  password: "postgres",
+  password: "resurrect",
   hostname: "localhost",
   database: "probuild_ex_dev",
   stacktrace: true,
