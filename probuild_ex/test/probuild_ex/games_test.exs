@@ -24,4 +24,64 @@ defmodule ProbuildEx.GamesTest do
       assert created_pro.id == fetched_pro.id
     end
   end
+
+  describe "summoner" do
+    test "update_or_create_summoner/1 should create summoner then update it" do
+      pro = pro_fixture()
+      summoner_attrs = Map.put(unique_summoner_attrs(), "pro_id", pro.id)
+
+      assert {:ok, created_summoner} = Games.update_or_create_summoner(summoner_attrs)
+
+      summoner_attrs = Map.put(summoner_attrs, "name", "faker")
+      assert {:ok, updated_summoner} = Games.update_or_create_summoner(summoner_attrs)
+
+      assert created_summoner.id == updated_summoner.id
+      assert updated_summoner.name == "faker"
+    end
+
+    test "fetch_summoner/1 opts" do
+      summoner_fixture(%{"name" => "faker"})
+      assert {:ok, _} = Games.fetch_summoner(name: "faker")
+
+      summoner_fixture(%{"puuid" => "123", "platform_id" => "euw1"})
+      assert {:ok, _} = Games.fetch_summoner(puuid: "123", platform_id: "euw1")
+
+      summoner_fixture(%{"pro_id" => nil, "puuid" => "abc"})
+      assert {:ok, _} = Games.fetch_summoner(is_pro?: false, puuid: "abc")
+
+      summoner_fixture(%{"puuid" => "abcd"})
+      assert {:ok, _} = Games.fetch_summoner(is_pro?: true, puuid: "abcd")
+
+      assert {:error, :not_found} = Games.fetch_summoner(puuid: "1234")
+    end
+  end
+
+  describe "pro transaction" do
+    @chovy_ugg %{
+      "current_ign" => "Shrimp Shark",
+      "current_team" => "Gen.G",
+      "league" => "LCK",
+      "main_role" => "mid",
+      "normalized_name" => "chovy",
+      "official_name" => "Chovy",
+      "region_id" => "euw1"
+    }
+
+    @chovy_summoner_riot %{
+      "accountId" => "ei4Gy40LkIa8yXDWgJByZPLwgNBSpTh4GVg7xA1l-RHzq5avJDZq516k",
+      "id" => "prjMc2d4I594w7ib9Ws966dDmchDQDxPrY9tckTfrvHuzPCPVIzvoUvapA",
+      "name" => "Shrimp Shark",
+      "profileIconId" => 29,
+      "puuid" => "i91dcy5ekDwcjaHZak-RSmM_NCskwtbH5bLKRwYr_BJvA71QZ14ze61fo4HxkDwJXgk3vfs_bUMqxA",
+      "revisionDate" => 1_634_857_524_000,
+      "summonerLevel" => 37
+    }
+
+    test "create_pro_complete/2 should create team, pro and summoner" do
+      assert {:ok, result} = Games.create_pro_complete(@chovy_ugg, @chovy_summoner_riot)
+      assert result.team.name == @chovy_ugg["current_team"]
+      assert result.pro.name == @chovy_ugg["official_name"]
+      assert result.summoner.name == @chovy_summoner_riot["name"]
+    end
+  end
 end
