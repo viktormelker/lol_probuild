@@ -7,7 +7,10 @@ defmodule ProbuildEx.Games.Game do
   schema "games" do
     field :creation, :utc_datetime
     field :duration, :integer
-    field :platform_id, Ecto.Enum, values: [:br1, :eun1, :euw1, :jp1, :kr, :la1, :la2, :na1, :oc1, :ru, :tr1]
+
+    field :platform_id, Ecto.Enum,
+      values: [:br1, :eun1, :euw1, :jp1, :kr, :la1, :la2, :na1, :oc1, :ru, :tr1]
+
     field :riot_id, :string
     field :version, :string
     field :winner, :integer

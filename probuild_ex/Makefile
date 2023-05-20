@@ -3,3 +3,6 @@ create-db:
 
 start-db:
 	docker start probuild
+
+fix:
+	mix format
