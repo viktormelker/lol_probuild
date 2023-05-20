@@ -15,20 +15,18 @@ defmodule ProbuildEx.Games do
   def create_pro_complete(ugg_pro, summoner_data) do
     Repo.transaction(fn ->
       with {:ok, team} <- fetch_or_create_team(ugg_pro["current_team"]),
-           {:ok, pro} <- fetch_or_create_pro(ugg_pro["official_name"], team.id)
-
-      attrs <-
-        Map.merge(summoner_data, %{
-          "platform_id" => ugg_pro["region_id"],
-          "pro_id" => pro.id
-        })
-
-      {:ok, summoner} <-
-        update_or_create_summoner(attrs) do
-          %{team: team, pro: pro, summoner: summoner}
-        else
-          {:error, error} -> Repo.rollback(error)
-        end
+           {:ok, pro} <- fetch_or_create_pro(ugg_pro["official_name"], team.id),
+           attrs <-
+             Map.merge(summoner_data, %{
+               "platform_id" => ugg_pro["region_id"],
+               "pro_id" => pro.id
+             }),
+           {:ok, summoner} <-
+             update_or_create_summoner(attrs) do
+        %{team: team, pro: pro, summoner: summoner}
+      else
+        {:error, error} -> Repo.rollback(error)
+      end
     end)
   end
 
@@ -40,6 +38,7 @@ defmodule ProbuildEx.Games do
       nil ->
         changeset = Team.changeset(%Team{}, %{name: name})
         Repo.insert(changeset)
+
       team ->
         {:ok, team}
     end
@@ -88,28 +87,34 @@ defmodule ProbuildEx.Games do
   end
 
   defp reduce_summoner_opts({:name, name}, query) do
-    from summoner in query,
+    from(summoner in query,
       where: summoner.name == ^name
+    )
   end
 
   defp reduce_summoner_opts({:puuid, puuid}, query) do
-    from summoner in query,
+    from(summoner in query,
       where: summoner.puuid == ^puuid
+    )
   end
 
   defp reduce_summoner_opts({:platform_id, platform_id}, query) do
-    from summoner in query,
+    from(summoner in query,
       where: summoner.platform_id == ^platform_id
+    )
   end
 
   defp reduce_summoner_opts({:is_pro?, true}, query) do
-    from summoner in query,
+    from(summoner in query,
       where: not is_nil(summoner.pro_id)
+    )
   end
 
   defp reduce_summoner_opts({:is_pro?, false}, query) do
-    from summoner in query,
-      where: is_nil(summoner.pro_id)  # Note, this was changed
+    from(summoner in query,
+      # Note, this was changed
+      where: is_nil(summoner.pro_id)
+    )
   end
 
   defp reduce_summoner_opts({key, value}, _query),
@@ -144,6 +149,7 @@ defmodule ProbuildEx.Games do
     case fetch_summoner(opts) do
       {:ok, summoner} ->
         update_summoner(summoner, attrs)
+
       {:error, :not_found} ->
         create_summoner(attrs)
     end

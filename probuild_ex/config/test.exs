@@ -7,7 +7,7 @@ import Config
 # Run `mix help test` for more information.
 config :probuild_ex, ProbuildEx.Repo,
   username: "postgres",
-  password: "postgres",
+  password: "resurrect",
   hostname: "localhost",
   database: "probuild_ex_test#{System.get_env("MIX_TEST_PARTITION")}",
   pool: Ecto.Adapters.SQL.Sandbox,
