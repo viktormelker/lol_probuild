@@ -49,6 +49,9 @@ defmodule ProbuildEx.GamesTest do
       summoner_fixture(%{"pro_id" => nil, "puuid" => "abc"})
       assert {:ok, _} = Games.fetch_summoner(is_pro?: false, puuid: "abc")
 
+      summoner_fixture(%{"pro_id" => "1234", "puuid" => "abcd1111"})
+      assert {:ok, _} = Games.fetch_summoner(is_pro?: true, puuid: "abcd1111")
+
       summoner_fixture(%{"puuid" => "abcd"})
       assert {:ok, _} = Games.fetch_summoner(is_pro?: true, puuid: "abcd")
 
