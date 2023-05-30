@@ -55,7 +55,7 @@ defmodule ProbuildEx.GamesFixtures do
   def summoner_fixture(attrs \\ %{}, pro \\ pro_fixture()) do
     attrs =
       attrs
-      |> Map.put("pro_id", pro.id)
+      |> Enum.into(%{"pro_id" => pro.id})
       |> unique_summoner_attrs()
 
     {:ok, summoner} = ProbuildEx.Games.create_summoner(attrs)

@@ -106,16 +106,13 @@ defmodule ProbuildEx.Games do
   end
 
   defp reduce_summoner_opts({:is_pro?, true}, query) do
-    from(summoner in query,
+    from summoner in query,
       where: not is_nil(summoner.pro_id)
-    )
   end
 
   defp reduce_summoner_opts({:is_pro?, false}, query) do
-    from(summoner in query,
-      # TODO: Why does this work?
-      where: not is_nil(summoner.pro_id)
-    )
+    from summoner in query,
+      where: is_nil(summoner.pro_id)
   end
 
   defp reduce_summoner_opts({key, value}, _query),
