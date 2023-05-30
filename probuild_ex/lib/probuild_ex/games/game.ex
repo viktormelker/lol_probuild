@@ -25,8 +25,8 @@ defmodule ProbuildEx.Games.Game do
   @doc false
   def changeset(game, attrs) do
     game
-    |> cast(attrs, [:creation, :duration, :platform_id, :riot_id, :version, :winner])
-    |> validate_required([:creation, :duration, :platform_id, :riot_id, :version, :winner])
+    |> cast(attrs, [:creation_int, :duration, :platform_id, :riot_id, :version, :winner])
+    |> validate_required([:creation_int, :duration, :platform_id, :riot_id, :version, :winner])
     |> clean_version()
     |> cast_creation()
     |> unique_constraint(:riot_id)
