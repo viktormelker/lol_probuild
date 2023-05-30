@@ -161,10 +161,9 @@ defmodule ProbuildEx.Games do
   """
   def list_pro_summoners(platform_id) do
     query =
-      from(summoner in Summoner,
+      from summoner in Summoner,
         where: summoner.platform_id == ^platform_id and not is_nil(summoner.pro_id),
         order_by: [desc: summoner.updated_at]
-      )
 
     Repo.all(query)
   end
@@ -194,6 +193,13 @@ defmodule ProbuildEx.Games do
       Enum.reduce(summoners_list, multi, fn summoner, multi ->
         reduce_put_or_create_summoner(platform_id, summoner, multi)
       end)
+
+    participants = get_in(match_data, ["info", "participants"])
+
+    multi = Enum.reduce(participants, multi, &reduce_create_participant/2)
+    multi = Enum.reduce(participants, multi, &reduce_set_opponent_participant/2)
+
+    Repo.transaction(multi)
   end
 
   defp reduce_put_or_create_summoner(_platform_id, %Summoner{} = summoner, multi) do
