@@ -40,3 +40,7 @@ config :phoenix, :json_library, Jason
 import_config "#{config_env()}.exs"
 
 config :tesla, :adapter, Tesla.Adapter.Hackney
+
+config :probuild_ex, :canon,
+  games: [platform_ids: ["euw1", "jp1", "kr", "na1", "br1"], delay: 10_000],
+  pros: [platform_ids: ["euw1", "jp1", "kr", "na1", "br1"], delay: 1_000 * 60 * 60 * 24]

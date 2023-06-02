@@ -25,3 +25,8 @@ config :logger, level: :warn
 
 # Initialize plugs at runtime for faster test compilation
 config :phoenix, :plug_init_mode, :runtime
+
+# Disable canon during tests
+config :probuild_ex, :canon,
+  games: [platform_ids: []],
+  pros: [platform_ids: []]
