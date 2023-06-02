@@ -44,3 +44,14 @@ config :tesla, :adapter, Tesla.Adapter.Hackney
 config :probuild_ex, :canon,
   games: [platform_ids: ["euw1", "jp1", "kr", "na1", "br1"], delay: 10_000],
   pros: [platform_ids: ["euw1", "jp1", "kr", "na1", "br1"], delay: 1_000 * 60 * 60 * 24]
+
+config :tailwind,
+  version: "3.1.8",
+  default: [
+    args: ~w(
+      --config=tailwind.config.js
+      --input=css/app.css
+      --output=../priv/static/assets/app.css
+    ),
+    cd: Path.expand("../assets", __DIR__)
+  ]
