@@ -19,7 +19,9 @@ defmodule ProbuildEx.Application do
       # Start a worker by calling: ProbuildEx.Worker.start_link(arg)
       # {ProbuildEx.Worker, arg}
       # Canon Supervisor
-      ProbuildEx.Canon.Supervisor
+      ProbuildEx.Canon.Supervisor,
+      # Ddragon
+      ProbuildEx.Ddragon.Cache
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
