@@ -72,7 +72,7 @@ defmodule ProbuildEx.RiotApi do
   # in some case we want the region who match the platform_id
   # defp url(region_or_platform_id, option)
 
-  defp url(region, option) when region in @regions do
+  defp url(region, _option) when region in @regions do
     "https://#{region}.api.riotgames.com"
   end
 
