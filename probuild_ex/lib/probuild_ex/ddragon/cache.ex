@@ -63,11 +63,27 @@ defmodule ProbuildEx.Ddragon.Cache do
     {:reply, response, state}
   end
 
-  defp request_and_cache_champions() do
+  def handle_call(:fetch_champions_search_map, _from, state) do
+    response =
+      case :ets.lookup(:champions, :search_map) do
+        [{_, champions_map}] ->
+          {:ok, champions_map}
+
+        [] ->
+          {:error, :not_found}
+      end
+
+    {:reply, response, state}
+  end
+
+  defp request_and_cache_champions do
     with {:ok, %{body: versions}} <- Api.fetch_versions(),
          last_game_version <- List.first(versions),
          {:ok, %{body: champions_response}} <- Api.fetch_champions(last_game_version) do
+      champions_search_map = create_champions_search_map(champions_response)
       champions_img_map = create_champions_img_map(champions_response)
+
+      :ets.insert(:champions, {:search_map, champions_search_map})
 
       Enum.each(champions_img_map, fn {key, img} ->
         :ets.insert(:champions, {{:img, key}, img})
@@ -106,6 +122,21 @@ defmodule ProbuildEx.Ddragon.Cache do
       key = String.to_integer(data["key"])
       value = data["image"]["full"]
 
+      {key, value}
+    end)
+    |> Map.new()
+  end
+
+  def fetch_champions_search_map do
+    GenServer.call(__MODULE__, :fetch_champions_search_map)
+  end
+
+  defp create_champions_search_map(champions_response) do
+    champions_response
+    |> Map.get("data")
+    |> Enum.map(fn {_champion_id, data} ->
+      key = String.downcase(data["name"])
+      value = String.to_integer(data["key"])
       {key, value}
     end)
     |> Map.new()
