@@ -22,9 +22,9 @@ defmodule ProbuildEx.App do
     @primary_key false
 
     embedded_schema do
-      field :search, :string
-      field :platform_id, Ecto.Enum, values: [:euw1, :jp1, :kr, :na1, :br1]
-      field :team_position, Ecto.Enum, values: [:UTILITY, :TOP, :JUNGLE, :MIDDLE, :BOTTOM]
+      field(:search, :string)
+      field(:platform_id, Ecto.Enum, values: [:euw1, :jp1, :kr, :na1, :br1])
+      field(:team_position, Ecto.Enum, values: [:UTILITY, :TOP, :JUNGLE, :MIDDLE, :BOTTOM])
     end
 
     def changeset(search \\ %__MODULE__{}, attrs \\ %{}) do
@@ -45,7 +45,7 @@ defmodule ProbuildEx.App do
   end
 
   defp pro_participant_base_query do
-    from participant in Participant,
+    from(participant in Participant,
       left_join: game in assoc(participant, :game),
       as: :game,
       left_join: summoner in assoc(participant, :summoner),
@@ -58,6 +58,7 @@ defmodule ProbuildEx.App do
         summoner: {summoner, pro: pro}
       ],
       order_by: [desc: game.creation]
+    )
   end
 
   def paginate_pro_participants(search_opts, page_number \\ 1) do
@@ -71,8 +72,9 @@ defmodule ProbuildEx.App do
   end
 
   defp reduce_pro_participant_opts({:platform_id, platform_id}, query) do
-    from [participant, game: game] in query,
+    from([participant, game: game] in query,
       where: game.platform_id == ^platform_id
+    )
   end
 
   defp reduce_pro_participant_opts({:team_position, nil}, query) do
@@ -80,8 +82,9 @@ defmodule ProbuildEx.App do
   end
 
   defp reduce_pro_participant_opts({:team_position, team_position}, query) do
-    from [participant] in query,
+    from([participant] in query,
       where: participant.team_position == ^team_position
+    )
   end
 
   defp reduce_pro_participant_opts({:search, nil}, query) do
@@ -100,8 +103,9 @@ defmodule ProbuildEx.App do
 
     search_str = search <> "%"
 
-    from [participant, pro: pro] in query,
+    from([participant, pro: pro] in query,
       where: ilike(pro.name, ^search_str) or participant.champion_id in ^champions_ids
+    )
   end
 
   defp reduce_pro_participant_opts({key, value}, _query),

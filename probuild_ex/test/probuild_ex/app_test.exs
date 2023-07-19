@@ -63,5 +63,4 @@ defmodule ProbuildEx.AppTest do
       %{total_entries: 0} = App.paginate_pro_participants(%{team_position: :MIDDLE})
     end
   end
-  end
 end

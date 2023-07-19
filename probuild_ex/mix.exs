@@ -50,7 +50,8 @@ defmodule ProbuildEx.MixProject do
       {:tesla, "~> 1.4"},
       {:hackney, "~> 1.13"},
       {:tailwind, "~> 0.1.6", runtime: Mix.env() == :dev},
-      {:scrivener_ecto, "~> 2.7"}
+      {:scrivener_ecto, "~> 2.7"},
+      {:credo, "~> 1.4", only: [:dev, :test], runtime: false}
     ]
   end
 
@@ -66,7 +67,9 @@ defmodule ProbuildEx.MixProject do
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
-      "assets.deploy": ["tailwind default --minify", "esbuild default --minify", "phx.digest"]
+      "assets.deploy": ["tailwind default --minify", "esbuild default --minify", "phx.digest"],
+      codebase: ["deps.unlock --check-unused", "format --check-formatted", "credo --strict"],
+      "codebase.fix": ["deps.clean --unlock --unused", "format"]
     ]
   end
 end

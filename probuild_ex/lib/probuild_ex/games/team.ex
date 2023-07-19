@@ -3,7 +3,7 @@ defmodule ProbuildEx.Games.Team do
   import Ecto.Changeset
 
   schema "teams" do
-    field :name, :string
+    field(:name, :string)
 
     timestamps()
   end

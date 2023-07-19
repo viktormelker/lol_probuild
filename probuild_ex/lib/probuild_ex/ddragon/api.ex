@@ -6,9 +6,9 @@ defmodule ProbuildEx.Ddragon.Api do
 
   @locale "en_US"
 
-  plug Tesla.Middleware.BaseUrl, "https://ddragon.leagueoflegends.com"
-  plug Tesla.Middleware.JSON
-  plug Tesla.Middleware.Logger
+  plug(Tesla.Middleware.BaseUrl, "https://ddragon.leagueoflegends.com")
+  plug(Tesla.Middleware.JSON)
+  plug(Tesla.Middleware.Logger)
 
   def fetch_champions(patch) do
     get("/cdn/#{patch}/data/#{@locale}/champion.json")

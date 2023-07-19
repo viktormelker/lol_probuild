@@ -5,8 +5,8 @@ defmodule ProbuildEx.Games.Pro do
   alias ProbuildEx.Games.Team
 
   schema "pros" do
-    field :name, :string
-    belongs_to :team, Team
+    field(:name, :string)
+    belongs_to(:team, Team)
 
     timestamps()
   end

@@ -106,13 +106,15 @@ defmodule ProbuildEx.Games do
   end
 
   defp reduce_summoner_opts({:is_pro?, true}, query) do
-    from summoner in query,
+    from(summoner in query,
       where: not is_nil(summoner.pro_id)
+    )
   end
 
   defp reduce_summoner_opts({:is_pro?, false}, query) do
-    from summoner in query,
+    from(summoner in query,
       where: is_nil(summoner.pro_id)
+    )
   end
 
   defp reduce_summoner_opts({key, value}, _query),
@@ -158,9 +160,10 @@ defmodule ProbuildEx.Games do
   """
   def list_pro_summoners(platform_id) do
     query =
-      from summoner in Summoner,
+      from(summoner in Summoner,
         where: summoner.platform_id == ^platform_id and not is_nil(summoner.pro_id),
         order_by: [desc: summoner.updated_at]
+      )
 
     Repo.all(query)
   end
