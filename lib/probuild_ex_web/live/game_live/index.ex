@@ -3,6 +3,9 @@ defmodule ProbuildExWeb.GameLive.Index do
 
   alias ProbuildEx.App
   alias ProbuildEx.Ddragon
+  alias ProbuildExWeb.GameLive.RowComponent
+
+  import ProbuildExWeb.GameLive.DdragonComponent
 
   @defaults %{
     page_title: "Listing games",

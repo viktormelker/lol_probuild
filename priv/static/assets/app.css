@@ -1,6 +1,6 @@
-/*
-! tailwindcss v3.1.8 | MIT License | https://tailwindcss.com
-*/
+/* This file is for your main application CSS */
+
+/* ! tailwindcss v3.1.8 | MIT License | https://tailwindcss.com */
 
 /*
 1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
@@ -804,6 +804,10 @@ select {
   margin-right: auto;
 }
 
+.ml-1 {
+  margin-left: 0.25rem;
+}
+
 .mt-1 {
   margin-top: 0.25rem;
 }
@@ -822,10 +826,6 @@ select {
 
 .mt-4 {
   margin-top: 1rem;
-}
-
-.ml-1 {
-  margin-left: 0.25rem;
 }
 
 .ml-10 {
@@ -856,16 +856,16 @@ select {
   display: none;
 }
 
-.h-5 {
-  height: 1.25rem;
+.h-8 {
+  height: 2rem;
 }
 
 .h-6 {
   height: 1.5rem;
 }
 
-.h-8 {
-  height: 2rem;
+.h-5 {
+  height: 1.25rem;
 }
 
 .h-16 {
@@ -876,20 +876,20 @@ select {
   min-height: 100vh;
 }
 
-.w-full {
-  width: 100%;
+.w-8 {
+  width: 2rem;
 }
 
-.w-5 {
-  width: 1.25rem;
+.w-full {
+  width: 100%;
 }
 
 .w-6 {
   width: 1.5rem;
 }
 
-.w-8 {
-  width: 2rem;
+.w-5 {
+  width: 1.25rem;
 }
 
 .max-w-3xl {
@@ -932,16 +932,16 @@ select {
   justify-content: space-between;
 }
 
-.space-y-1 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-y-reverse: 0;
-  margin-top: calc(0.25rem * calc(1 - var(--tw-space-y-reverse)));
-  margin-bottom: calc(0.25rem * var(--tw-space-y-reverse));
-}
-
 .space-x-1 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-x-reverse: 0;
   margin-right: calc(0.25rem * var(--tw-space-x-reverse));
   margin-left: calc(0.25rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
+.space-y-1 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(0.25rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(0.25rem * var(--tw-space-y-reverse));
 }
 
 .space-x-4 > :not([hidden]) ~ :not([hidden]) {
@@ -956,6 +956,10 @@ select {
 
 .text-ellipsis {
   text-overflow: ellipsis;
+}
+
+.whitespace-nowrap {
+  white-space: nowrap;
 }
 
 .rounded-full {
@@ -988,6 +992,11 @@ select {
   border-left-width: 8px;
 }
 
+.border-gray-400 {
+  --tw-border-opacity: 1;
+  border-color: rgb(156 163 175 / var(--tw-border-opacity));
+}
+
 .border-gray-300 {
   --tw-border-opacity: 1;
   border-color: rgb(209 213 219 / var(--tw-border-opacity));
@@ -1003,9 +1012,9 @@ select {
   border-color: rgb(239 68 68 / var(--tw-border-opacity));
 }
 
-.border-gray-400 {
-  --tw-border-opacity: 1;
-  border-color: rgb(156 163 175 / var(--tw-border-opacity));
+.bg-gray-900 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(17 24 39 / var(--tw-bg-opacity));
 }
 
 .bg-white {
@@ -1013,9 +1022,9 @@ select {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
-.bg-gray-900 {
+.bg-gray-200 {
   --tw-bg-opacity: 1;
-  background-color: rgb(17 24 39 / var(--tw-bg-opacity));
+  background-color: rgb(229 231 235 / var(--tw-bg-opacity));
 }
 
 .bg-indigo-600 {
@@ -1130,6 +1139,16 @@ select {
   font-weight: 700;
 }
 
+.text-red-500 {
+  --tw-text-opacity: 1;
+  color: rgb(239 68 68 / var(--tw-text-opacity));
+}
+
+.text-yellow-600 {
+  --tw-text-opacity: 1;
+  color: rgb(202 138 4 / var(--tw-text-opacity));
+}
+
 .text-gray-400 {
   --tw-text-opacity: 1;
   color: rgb(156 163 175 / var(--tw-text-opacity));
@@ -1140,9 +1159,9 @@ select {
   color: rgb(55 65 81 / var(--tw-text-opacity));
 }
 
-.text-red-500 {
+.text-blue-500 {
   --tw-text-opacity: 1;
-  color: rgb(239 68 68 / var(--tw-text-opacity));
+  color: rgb(59 130 246 / var(--tw-text-opacity));
 }
 
 .text-white {
@@ -1176,7 +1195,93 @@ select {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 
-/* This file is for your main application CSS */
+/* Custom grids */
+
+.grid-participants-header {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .grid-participants-header {
+    display: grid;
+    grid-template-columns: 11% 17% 12% 10% 10% 35% 4%;
+  }
+
+  .grid-team-participants-header {
+    display: grid;
+    grid-template-columns: 25% 11% 12% 12% 40%;
+  }
+}
+
+.grid-participants {
+  display: grid;
+  grid-gap: 12px 0px;
+  grid-template-rows: auto auto;
+  grid-template-columns: 20% 20% 60%;
+  grid-template-areas:
+    'player kda versus'
+    'creation summoners build';
+}
+
+.grid-team-participants {
+  display: grid;
+  grid-gap: 3px 0px;
+  grid-template-rows: auto auto;
+  grid-template-columns: 60% 20% 20%;
+  grid-template-areas:
+    'summoner-champion kda summoners'
+    'build . gold';
+}
+
+@media (min-width: 768px) {
+  .grid-participants {
+    grid-gap: 0px;
+    grid-template-columns: 11% 17% 12% 10% 10% 35% 4%;
+    grid-template-areas: 'creation player versus kda summoners build ellipsis';
+  }
+
+  .grid-team-participants {
+    grid-gap: 0px;
+    grid-template-columns: 25% 11% 12% 12% 40%;
+    grid-template-areas: 'summoner-champion summoners kda gold build ';
+  }
+}
+
+.grid-area-creation {
+  grid-area: creation;
+}
+
+.grid-area-player {
+  grid-area: player;
+}
+
+.grid-area-versus {
+  grid-area: versus;
+}
+
+.grid-area-kda {
+  grid-area: kda;
+}
+
+.grid-area-summoners {
+  grid-area: summoners;
+}
+
+.grid-area-build {
+  grid-area: build;
+}
+
+.grid-area-ellipsis {
+  grid-area: ellipsis;
+}
+
+.grid-area-summoner-champion {
+  grid-area: summoner-champion;
+}
+
+.grid-area-gold {
+  grid-area: gold;
+}
 
 /* Alerts and form errors used by phx.new */
 
@@ -1231,12 +1336,12 @@ select {
   transition: opacity 1s ease-out;
 }
 
-.phx-loading{
+.phx-loading {
   cursor: wait;
 }
 
 .phx-modal {
-  opacity: 1!important;
+  opacity: 1 !important;
   position: fixed;
   z-index: 1;
   left: 0;
@@ -1244,7 +1349,7 @@ select {
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgba(0,0,0,0.4);
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .phx-modal-content {
@@ -1289,45 +1394,33 @@ select {
           animation: 0.2s ease-out 0s normal forwards 1 fade-out-keys;
 }
 
-@-webkit-keyframes fade-in-scale-keys{
+@-webkit-keyframes fade-in-scale-keys {
   0% {
     scale: 0.95;
     opacity: 0;
   }
 
   100% {
-    scale: 1.0;
+    scale: 1;
     opacity: 1;
   }
 }
 
-@keyframes fade-in-scale-keys{
+@keyframes fade-in-scale-keys {
   0% {
     scale: 0.95;
     opacity: 0;
   }
 
   100% {
-    scale: 1.0;
+    scale: 1;
     opacity: 1;
   }
 }
 
-@-webkit-keyframes fade-out-scale-keys{
+@-webkit-keyframes fade-out-scale-keys {
   0% {
-    scale: 1.0;
-    opacity: 1;
-  }
-
-  100% {
-    scale: 0.95;
-    opacity: 0;
-  }
-}
-
-@keyframes fade-out-scale-keys{
-  0% {
-    scale: 1.0;
+    scale: 1;
     opacity: 1;
   }
 
@@ -1337,7 +1430,19 @@ select {
   }
 }
 
-@-webkit-keyframes fade-in-keys{
+@keyframes fade-out-scale-keys {
+  0% {
+    scale: 1;
+    opacity: 1;
+  }
+
+  100% {
+    scale: 0.95;
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes fade-in-keys {
   0% {
     opacity: 0;
   }
@@ -1347,7 +1452,7 @@ select {
   }
 }
 
-@keyframes fade-in-keys{
+@keyframes fade-in-keys {
   0% {
     opacity: 0;
   }
@@ -1357,7 +1462,7 @@ select {
   }
 }
 
-@-webkit-keyframes fade-out-keys{
+@-webkit-keyframes fade-out-keys {
   0% {
     opacity: 1;
   }
@@ -1367,7 +1472,7 @@ select {
   }
 }
 
-@keyframes fade-out-keys{
+@keyframes fade-out-keys {
   0% {
     opacity: 1;
   }
@@ -1375,63 +1480,6 @@ select {
   100% {
     opacity: 0;
   }
-}
-
-.grid-participants-header {
-  display: none;
-}
-
-@media (min-width: 768px) {
-  .grid-participants-header {
-    display: grid;
-    grid-template-columns: 11% 17% 12% 10% 10% 35% 4%;
-  }
-}
-
-.grid-participants {
-  display: grid;
-  grid-gap: 12px 0px;
-  grid-template-rows: auto auto;
-  grid-template-columns: 20% 20% 60%;
-  grid-template-areas:
-    'player kda versus'
-    'creation summoners build';
-}
-
-@media (min-width: 768px) {
-  .grid-participants {
-    grid-gap: 0px;
-    grid-template-columns: 11% 17% 12% 10% 10% 35% 4%;
-    grid-template-areas: 'creation player versus kda summoners build ellipsis';
-  }
-}
-
-.grid-area-creation {
-  grid-area: creation;
-}
-
-.grid-area-player {
-  grid-area: player;
-}
-
-.grid-area-versus {
-  grid-area: versus;
-}
-
-.grid-area-kda {
-  grid-area: kda;
-}
-
-.grid-area-summoners {
-  grid-area: summoners;
-}
-
-.grid-area-build {
-  grid-area: build;
-}
-
-.grid-area-ellipsis {
-  grid-area: ellipsis;
 }
 
 .hover\:cursor-pointer:hover {

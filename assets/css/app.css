@@ -1,8 +1,94 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
-
 /* This file is for your main application CSS */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Custom grids */
+.grid-participants-header {
+  display: none;
+}
+
+@media (min-width: theme('screens.md')) {
+  .grid-participants-header {
+    display: grid;
+    grid-template-columns: 11% 17% 12% 10% 10% 35% 4%;
+  }
+
+  .grid-team-participants-header {
+    display: grid;
+    grid-template-columns: 25% 11% 12% 12% 40%;
+  }
+}
+
+.grid-participants {
+  display: grid;
+  grid-gap: 12px 0px;
+  grid-template-rows: auto auto;
+  grid-template-columns: 20% 20% 60%;
+  grid-template-areas:
+    'player kda versus'
+    'creation summoners build';
+}
+
+.grid-team-participants {
+  display: grid;
+  grid-gap: 3px 0px;
+  grid-template-rows: auto auto;
+  grid-template-columns: 60% 20% 20%;
+  grid-template-areas:
+    'summoner-champion kda summoners'
+    'build . gold';
+}
+
+@media (min-width: theme('screens.md')) {
+  .grid-participants {
+    grid-gap: 0px;
+    grid-template-columns: 11% 17% 12% 10% 10% 35% 4%;
+    grid-template-areas: 'creation player versus kda summoners build ellipsis';
+  }
+
+  .grid-team-participants {
+    grid-gap: 0px;
+    grid-template-columns: 25% 11% 12% 12% 40%;
+    grid-template-areas: 'summoner-champion summoners kda gold build ';
+  }
+}
+
+.grid-area-creation {
+  grid-area: creation;
+}
+
+.grid-area-player {
+  grid-area: player;
+}
+
+.grid-area-versus {
+  grid-area: versus;
+}
+
+.grid-area-kda {
+  grid-area: kda;
+}
+
+.grid-area-summoners {
+  grid-area: summoners;
+}
+
+.grid-area-build {
+  grid-area: build;
+}
+
+.grid-area-ellipsis {
+  grid-area: ellipsis;
+}
+
+.grid-area-summoner-champion {
+  grid-area: summoner-champion;
+}
+
+.grid-area-gold {
+  grid-area: gold;
+}
 
 /* Alerts and form errors used by phx.new */
 .alert {
@@ -11,27 +97,33 @@
   border: 1px solid transparent;
   border-radius: 4px;
 }
+
 .alert-info {
   color: #31708f;
   background-color: #d9edf7;
   border-color: #bce8f1;
 }
+
 .alert-warning {
   color: #8a6d3b;
   background-color: #fcf8e3;
   border-color: #faebcc;
 }
+
 .alert-danger {
   color: #a94442;
   background-color: #f2dede;
   border-color: #ebccd1;
 }
+
 .alert p {
   margin-bottom: 0;
 }
+
 .alert:empty {
   display: none;
 }
+
 .invalid-feedback {
   color: #a94442;
   display: block;
@@ -49,12 +141,12 @@
   transition: opacity 1s ease-out;
 }
 
-.phx-loading{
+.phx-loading {
   cursor: wait;
 }
 
 .phx-modal {
-  opacity: 1!important;
+  opacity: 1 !important;
   position: fixed;
   z-index: 1;
   left: 0;
@@ -62,7 +154,7 @@
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgba(0,0,0,0.4);
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .phx-modal-content {
@@ -98,82 +190,51 @@
 .fade-in {
   animation: 0.2s ease-out 0s normal forwards 1 fade-in-keys;
 }
+
 .fade-out {
   animation: 0.2s ease-out 0s normal forwards 1 fade-out-keys;
 }
 
-@keyframes fade-in-scale-keys{
-  0% { scale: 0.95; opacity: 0; }
-  100% { scale: 1.0; opacity: 1; }
-}
+@keyframes fade-in-scale-keys {
+  0% {
+    scale: 0.95;
+    opacity: 0;
+  }
 
-@keyframes fade-out-scale-keys{
-  0% { scale: 1.0; opacity: 1; }
-  100% { scale: 0.95; opacity: 0; }
-}
-
-@keyframes fade-in-keys{
-  0% { opacity: 0; }
-  100% { opacity: 1; }
-}
-
-@keyframes fade-out-keys{
-  0% { opacity: 1; }
-  100% { opacity: 0; }
-}
-.grid-participants-header {
-  display: none;
-}
-
-@media (min-width: theme('screens.md')) {
-  .grid-participants-header {
-    display: grid;
-    grid-template-columns: 11% 17% 12% 10% 10% 35% 4%;
+  100% {
+    scale: 1;
+    opacity: 1;
   }
 }
 
-.grid-participants {
-  display: grid;
-  grid-gap: 12px 0px;
-  grid-template-rows: auto auto;
-  grid-template-columns: 20% 20% 60%;
-  grid-template-areas:
-    'player kda versus'
-    'creation summoners build';
-}
+@keyframes fade-out-scale-keys {
+  0% {
+    scale: 1;
+    opacity: 1;
+  }
 
-@media (min-width: theme('screens.md')) {
-  .grid-participants {
-    grid-gap: 0px;
-    grid-template-columns: 11% 17% 12% 10% 10% 35% 4%;
-    grid-template-areas: 'creation player versus kda summoners build ellipsis';
+  100% {
+    scale: 0.95;
+    opacity: 0;
   }
 }
 
-.grid-area-creation {
-  grid-area: creation;
+@keyframes fade-in-keys {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }
 
-.grid-area-player {
-  grid-area: player;
-}
+@keyframes fade-out-keys {
+  0% {
+    opacity: 1;
+  }
 
-.grid-area-versus {
-  grid-area: versus;
-}
-
-.grid-area-kda {
-  grid-area: kda;
-}
-
-.grid-area-summoners {
-  grid-area: summoners;
-}
-
-.grid-area-build {
-  grid-area: build;
-}
-
-.grid-area-ellipsis {
-  grid-area: ellipsis;
+  100% {
+    opacity: 0;
+  }
 }
