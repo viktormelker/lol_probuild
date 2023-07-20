@@ -12,8 +12,6 @@ defmodule ProbuildEx.Application do
       ProbuildEx.Repo,
       # Start the Telemetry supervisor
       ProbuildExWeb.Telemetry,
-      # Start the PubSub system
-      {Phoenix.PubSub, name: ProbuildEx.PubSub},
       # Start the Endpoint (http/https)
       ProbuildExWeb.Endpoint,
       # Start a worker by calling: ProbuildEx.Worker.start_link(arg)
@@ -21,7 +19,9 @@ defmodule ProbuildEx.Application do
       # Canon Supervisor
       ProbuildEx.Canon.Supervisor,
       # Ddragon
-      ProbuildEx.Ddragon.Cache
+      ProbuildEx.Ddragon.Cache,
+      # Start the PubSub system
+      {Phoenix.PubSub, name: :pbx_pubsub}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

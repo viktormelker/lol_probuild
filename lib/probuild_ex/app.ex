@@ -108,6 +108,12 @@ defmodule ProbuildEx.App do
     )
   end
 
+  defp reduce_pro_participant_opts({:participant_id, participant_id}, query) do
+    from(participant in query,
+      where: participant.id == ^participant_id
+    )
+  end
+
   defp reduce_pro_participant_opts({key, value}, _query),
     do: raise("not supported option #{inspect(key)} with value #{inspect(value)}")
 
@@ -136,6 +142,16 @@ defmodule ProbuildEx.App do
     case Repo.one(query) do
       nil -> {:error, :not_found}
       game -> {:ok, game}
+    end
+  end
+
+  def fetch_pro_participant(search_opts) do
+    query =
+      Enum.reduce(search_opts, pro_participant_base_query(), &reduce_pro_participant_opts/2)
+
+    case Repo.one(query) do
+      nil -> {:error, :not_found}
+      participant -> {:ok, participant}
     end
   end
 end
