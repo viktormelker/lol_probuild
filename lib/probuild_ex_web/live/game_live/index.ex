@@ -15,6 +15,7 @@ defmodule ProbuildExWeb.GameLive.Index do
     load_more?: false
   }
 
+  @impl true
   def mount(_params, _session, socket) do
     {:ok, assign(socket, @defaults), temporary_assigns: [participants: []]}
   end
