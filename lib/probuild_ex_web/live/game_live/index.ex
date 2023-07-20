@@ -99,7 +99,6 @@ defmodule ProbuildExWeb.GameLive.Index do
 
   def handle_event("load-more", _params, socket) do
     page = socket.assigns.page
-    IO.puts("Loading more stuff")
 
     socket =
       if page.page_number < page.total_pages do
