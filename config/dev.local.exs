@@ -1,7 +1,7 @@
 import Config
 
 # put your token below
-config :probuild_ex, ProbuildEx.RiotApi, token: "RGAPI-c716f5bc-eb52-47f6-ac8c-f84a818e815f"
+config :probuild_ex, ProbuildEx.RiotApi, token: "RGAPI-a32284f8-8fb4-4316-9826-2821f2c00024"
 
 # since tesla and ecto_sql are deps don't forget to recompile them if you want to turn on / off their logs
 # mix deps.compile --force tesla ecto_sql
